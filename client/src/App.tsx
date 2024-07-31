@@ -1,35 +1,20 @@
-import { useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+// src/App.tsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginPage from './LoginPage';
+import RegisterPage from './RegisterPage';
 
-export default function App() {
-  const [serverData, setServerData] = useState('');
-
-  useEffect(() => {
-    async function readServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
-
-      console.log('Data from server:', data);
-
-      setServerData(data.message);
-    }
-
-    readServerData();
-  }, []);
-
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Routes>
       </div>
-      <h1>{serverData}</h1>
-    </>
+    </Router>
   );
-}
+};
+
+export default App;
