@@ -1,17 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './LoginPage.css';
 
 function LoginPage() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const navigate = useNavigate();
 
   function handleLogin() {
     console.log('Logging in:', { username, password });
-    setTimeout(() => {
-      navigate('/sports');
-    }, 1000);
   }
 
   return (
@@ -33,7 +29,7 @@ function LoginPage() {
         <span>→</span>
       </div>
       <p>
-        Don't have an account? <a href="/register">REGISTER</a>
+        Don't have an account? <Link to="/register">REGISTER</Link>
       </p>
     </div>
   );
