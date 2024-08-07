@@ -1,0 +1,50 @@
+/* src/SportGames.css */
+.sport-games-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sports-icons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.sport-icon {
+  cursor: pointer;
+  text-align: center;
+}
+
+.sport-section {
+  width: 100%;
+  text-align: center;
+}
+
+.sport-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.game {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.error {
+  color: red;
+}
