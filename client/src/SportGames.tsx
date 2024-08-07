@@ -1,5 +1,5 @@
 // src/SportGames.tsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './SportGames.css';
 import { FaBaseball, FaFootball, FaBasketball } from 'react-icons/fa6';
 import { PiSoccerBallFill } from 'react-icons/pi';
