@@ -5,9 +5,26 @@ import { FaBaseball, FaFootball, FaBasketball } from 'react-icons/fa6';
 import { PiSoccerBallFill } from 'react-icons/pi';
 
 interface Game {
+  id: string;
   home_team: string;
   away_team: string;
   commence_time: string;
+  bookmakers: Bookmaker[];
+}
+
+interface Bookmaker {
+  title: string;
+  markets: Market[];
+}
+
+interface Market {
+  key: string;
+  outcomes: Outcome[];
+}
+
+interface Outcome {
+  name: string;
+  price: number;
 }
 
 const apiKey = 'da52f74833da22f20b3770dce701ef20';
@@ -43,6 +60,7 @@ function SportGames() {
   const [games, setGames] = useState<{ [key: string]: Game[] }>({});
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
   const [selectedSport, setSelectedSport] = useState<string | null>(null);
+  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
 
   useEffect(() => {
     sports.forEach((sport) => {
@@ -70,6 +88,11 @@ function SportGames() {
 
   function handleSportClick(sportKey: string) {
     setSelectedSport((prev) => (prev === sportKey ? null : sportKey));
+    setSelectedGame(null);
+  }
+
+  function handleGameClick(game: Game) {
+    setSelectedGame(game);
   }
 
   return (
@@ -94,11 +117,46 @@ function SportGames() {
           </h2>
           {errors[selectedSport] ? (
             <p className="error">{errors[selectedSport]}</p>
+          ) : selectedGame ? (
+            <div className="selected-game">
+              <h3>
+                {selectedGame.home_team} vs {selectedGame.away_team}
+              </h3>
+              <p>
+                Commence Time:{' '}
+                {new Date(selectedGame.commence_time).toLocaleString()}
+              </p>
+              <h4>Odds:</h4>
+              {selectedGame.bookmakers.map((bookmaker) => (
+                <div key={bookmaker.title}>
+                  <h5>{bookmaker.title}</h5>
+                  {bookmaker.markets.map((market) => (
+                    <div key={market.key}>
+                      {market.outcomes.map((outcome) => (
+                        <p key={outcome.name}>
+                          {outcome.name}: {outcome.price}
+                        </p>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <div className="bet-section">
+                <h4>Place Your Bet</h4>
+                {/* Add betting form or functionality here */}
+              </div>
+              <button onClick={() => setSelectedGame(null)}>
+                Back to games
+              </button>
+            </div>
           ) : (
             <div className="game-list">
               {games[selectedSport]?.length > 0 ? (
-                games[selectedSport].map((game, index) => (
-                  <div key={index} className="game">
+                games[selectedSport].map((game) => (
+                  <div
+                    key={game.id}
+                    className="game"
+                    onClick={() => handleGameClick(game)}>
                     <span>
                       {game.home_team} vs {game.away_team}
                     </span>

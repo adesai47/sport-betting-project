@@ -1,0 +1,13 @@
+/* src/GameDetails.css */
+.game-details {
+  text-align: center;
+  padding: 20px;
+}
+
+.bookmaker {
+  margin-top: 20px;
+}
+
+.market {
+  margin-bottom: 10px;
+}
